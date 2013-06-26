@@ -1,0 +1,12 @@
+Source: ros-hydro-controller-manager
+Section: misc
+Priority: extra
+Maintainer: "Wim Meeussen <wim@hidof.com>"
+Build-Depends: debhelper (>= 7.0.50~), ros-hydro-catkin, ros-hydro-controller_interface, ros-hydro-controller_manager_msgs, ros-hydro-hardware_interface, ros-hydro-pluginlib, ros-hydro-realtime-tools
+Homepage: https://github.com/willowgarage/ros_control/wiki
+Standards-Version: 3.9.2
+
+Package: ros-hydro-controller-manager
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-hydro-controller_interface, ros-hydro-controller_manager_msgs, ros-hydro-hardware_interface, ros-hydro-pluginlib, ros-hydro-realtime-tools
+Description: The controller manager.
