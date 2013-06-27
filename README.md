@@ -1,3 +1,29 @@
+## ros_control - 0.4.0-1
+
+User `william@dosa` released the packages in the `ros_control` repository by running `/usr/local/bin/bloom-release --track hydro --rosdistro hydro ros_control` on `Thu, 27 Jun 2013 02:55:41 -0000`
+
+These packages were released:
+- `controller_interface`
+- `controller_manager`
+- `controller_manager_msgs`
+- `controller_manager_tests`
+- `hardware_interface`
+- `ros_control`
+- `transmission_interface`
+
+Version of package(s) in repository `ros_control`:
+- rosdistro version: `0.4.0-0`
+- old version: `0.4.0-0`
+- new version: `0.4.0-1`
+
+Versions of tools used:
+- bloom version: `0.4.1`
+- catkin_pkg version: `0.1.14`
+- rosdep version: `0.10.16`
+- rosdistro version: `0.2.9`
+- vcstools version: `0.1.30`
+
+
 ## ros_control - 0.4.0-0
 
 User `ahendrix@bof` released the packages in the `ros_control` repository by running `/usr/bin/bloom-release ros_control --track hydro --rosdistro hydro` on `Wed, 26 Jun 2013 06:49:26 -0000`
