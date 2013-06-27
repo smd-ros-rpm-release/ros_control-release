@@ -1,19 +1,53 @@
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
+cmake_minimum_required(VERSION 2.8.3)
+project(controller_manager)
 
-set(ROSPACK_MAKEDIST true)
+if(USE_ROSBUILD)
 
-# Append to CPACK_SOURCE_IGNORE_FILES a semicolon-separated list of
-# directories (or patterns, but directories should suffice) that should
-# be excluded from the distro.  This is not the place to put things that
-# should be ignored everywhere, like "build" directories; that happens in
-# rosbuild/rosbuild.cmake.  Here should be listed packages that aren't
-# ready for inclusion in a distro.
-#
-# This list is combined with the list in rosbuild/rosbuild.cmake.  Note
-# that CMake 2.6 may be required to ensure that the two lists are combined
-# properly.  CMake 2.4 seems to have unpredictable scoping rules for such
-# variables.
-#list(APPEND CPACK_SOURCE_IGNORE_FILES /core/experimental)
+  include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 
-rosbuild_make_distribution(0.0.3)
+  rosbuild_init()
+
+  rosbuild_add_library(${PROJECT_NAME} 
+    src/controller_manager.cpp
+    include/controller_manager/controller_manager.h
+    include/controller_manager/controller_loader_interface.h
+    include/controller_manager/controller_loader.h)
+
+else()
+
+  # Load catkin and all dependencies required for this package
+  find_package(catkin REQUIRED COMPONENTS controller_interface controller_manager_msgs hardware_interface realtime_tools pluginlib)
+
+  include_directories(include ${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS})
+
+  add_library(${PROJECT_NAME}
+    src/controller_manager.cpp
+    include/controller_manager/controller_manager.h
+    include/controller_manager/controller_loader_interface.h
+    include/controller_manager/controller_loader.h)
+
+  if(catkin_EXPORTED_TARGETS)
+    add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
+  endif()
+
+  # Declare catkin package
+  catkin_package(
+    DEPENDS boost
+    CATKIN_DEPENDS controller_interface controller_manager_msgs hardware_interface realtime_tools pluginlib
+    INCLUDE_DIRS include
+    LIBRARIES ${PROJECT_NAME}
+    )
+
+  # Install
+  install(DIRECTORY include/${PROJECT_NAME}/
+    DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+
+  install(TARGETS ${PROJECT_NAME}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+
+  install(DIRECTORY scripts/
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+  catkin_python_setup()
+
+endif()
