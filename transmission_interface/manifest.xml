@@ -1,11 +1,13 @@
 <package>
   <description>
-    Transmission Interaface.
+    Transmission Interface.
   </description>
   <author>Adolfo Rodriguez Tsouroukdissian</author>
   <license>Modified BSD</license>
   <review status="unreviewed" notes=""/>
-  <url>https://github.com/willowgarage/ros_control/wiki</url>
+  <url>https://github.com/ros-controls/ros_control/wiki</url>
+
+  <rosdep name="tinyxml" />
 
   <depend package="hardware_interface" />
 

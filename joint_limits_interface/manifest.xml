@@ -1,13 +1,15 @@
 <package>
   <description>
-    Hardware Interaface base class.
+    Interface for enforcing joint limits.
   </description>
-  <author>Wim Meeussen</author>
+  <author>Adolfo Rodriguez Tsouroukdissian</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>https://github.com/ros-controls/ros_control/wiki</url>
 
   <depend package="roscpp" />
+  <depend package="rostest" />
+  <depend package="hardware_interface" />
 
   <export>
     <cpp cflags="-I${prefix}/include" />
