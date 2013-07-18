@@ -1,48 +1,19 @@
-cmake_minimum_required(VERSION 2.8.3)
-project(hardware_interface)
+cmake_minimum_required(VERSION 2.4.6)
+include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 
-if(USE_ROSBUILD)
+set(ROSPACK_MAKEDIST true)
 
-  include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
-  rosbuild_init()
+# Append to CPACK_SOURCE_IGNORE_FILES a semicolon-separated list of
+# directories (or patterns, but directories should suffice) that should
+# be excluded from the distro.  This is not the place to put things that
+# should be ignored everywhere, like "build" directories; that happens in
+# rosbuild/rosbuild.cmake.  Here should be listed packages that aren't
+# ready for inclusion in a distro.
+#
+# This list is combined with the list in rosbuild/rosbuild.cmake.  Note
+# that CMake 2.6 may be required to ensure that the two lists are combined
+# properly.  CMake 2.4 seems to have unpredictable scoping rules for such
+# variables.
+#list(APPEND CPACK_SOURCE_IGNORE_FILES /core/experimental)
 
-  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-  set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
-
-  rosbuild_add_gtest(hardware_resource_manager_test  test/hardware_resource_manager_test.cpp)
-  rosbuild_add_gtest(actuator_state_interface_test   test/actuator_state_interface_test.cpp)
-  rosbuild_add_gtest(actuator_command_interface_test test/actuator_command_interface_test.cpp)
-  rosbuild_add_gtest(joint_state_interface_test      test/joint_state_interface_test.cpp)
-  rosbuild_add_gtest(joint_command_interface_test    test/joint_command_interface_test.cpp)
-  rosbuild_add_gtest(robot_hw_test                   test/robot_hw_test.cpp)
-
-  # TODO: why is it explicitly needed???, without it the linker fails.
-  target_link_libraries(hardware_resource_manager_test  pthread)
-  target_link_libraries(actuator_state_interface_test   pthread)
-  target_link_libraries(actuator_command_interface_test pthread)
-  target_link_libraries(joint_state_interface_test      pthread)
-  target_link_libraries(joint_command_interface_test    pthread)
-  target_link_libraries(robot_hw_test                   pthread)
-
-else()
-
-  find_package(catkin REQUIRED COMPONENTS roscpp)
-
-  # Declare catkin package
-  catkin_package(
-    CATKIN_DEPENDS roscpp
-    INCLUDE_DIRS include
-    )
-
-  catkin_add_gtest(hardware_resource_manager_test  test/hardware_resource_manager_test.cpp)
-  catkin_add_gtest(actuator_state_interface_test   test/actuator_state_interface_test.cpp)
-  catkin_add_gtest(actuator_command_interface_test test/actuator_command_interface_test.cpp)
-  catkin_add_gtest(joint_state_interface_test      test/joint_state_interface_test.cpp)
-  catkin_add_gtest(joint_command_interface_test    test/joint_command_interface_test.cpp)
-  catkin_add_gtest(robot_hw_test                   test/robot_hw_test.cpp)
-
-  # Install
-  install(DIRECTORY include/${PROJECT_NAME}/
-    DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
-
-endif()
+rosbuild_make_distribution(0.0.3)
