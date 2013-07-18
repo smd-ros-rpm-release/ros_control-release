@@ -20,16 +20,6 @@ else()
 
   include_directories(include ${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS})
 
-  add_library(${PROJECT_NAME}
-    src/controller_manager.cpp
-    include/controller_manager/controller_manager.h
-    include/controller_manager/controller_loader_interface.h
-    include/controller_manager/controller_loader.h)
-
-  if(catkin_EXPORTED_TARGETS)
-    add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
-  endif()
-
   # Declare catkin package
   catkin_package(
     DEPENDS boost
@@ -38,6 +28,18 @@ else()
     LIBRARIES ${PROJECT_NAME}
     )
 
+  add_library(${PROJECT_NAME}
+    src/controller_manager.cpp
+    include/controller_manager/controller_manager.h
+    include/controller_manager/controller_loader_interface.h
+    include/controller_manager/controller_loader.h
+  )
+  target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+
+  if(catkin_EXPORTED_TARGETS)
+    add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
+  endif()
+
   # Install
   install(DIRECTORY include/${PROJECT_NAME}/
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
@@ -45,7 +47,7 @@ else()
   install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 
-  install(DIRECTORY scripts/
+  install(PROGRAMS scripts/spawner scripts/unspawner scripts/controller_manager
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
   catkin_python_setup()
