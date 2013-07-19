@@ -1,0 +1,12 @@
+Source: ros-hydro-ros-control
+Section: misc
+Priority: extra
+Maintainer: "Wim Meeussen <wim@hidof.com>, Adolfo Rodriguez Tsouroukdissian <adolfo.rodriguez@pal-robotics.com>, Dave Coleman <davetcoleman@gmail.com>"
+Build-Depends: debhelper (>= 7.0.50~), ros-hydro-catkin
+Homepage: http://ros.org/wiki/ros_control
+Standards-Version: 3.9.2
+
+Package: ros-hydro-ros-control
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-hydro-control-toolbox, ros-hydro-controller-interface, ros-hydro-controller-manager, ros-hydro-controller-manager-msgs, ros-hydro-controller-manager-tests, ros-hydro-hardware-interface, ros-hydro-joint-limits-interface, ros-hydro-realtime-tools, ros-hydro-transmission-interface
+Description: A set of packages that include controller interfaces, controller managers, transmissions, hardware_interfaces and the control_toolbox.
