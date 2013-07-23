@@ -1,6 +1,6 @@
 <package>
   <name>transmission_interface</name>
-  <version>0.5.3</version>
+  <version>0.5.4</version>
   <description>Transmission Interface.</description>
 
   <maintainer email="adolfo.rodriguez@pal-robotics.com">Adolfo Rodriguez Tsouroukdissian</maintainer>
@@ -17,6 +17,9 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>hardware_interface</build_depend>
+  <build_depend>tinyxml</build_depend>
+
+  <run_depend>tinyxml</run_depend>
 
   <export>
     <cpp cflags="-I${prefix}/include"/>
