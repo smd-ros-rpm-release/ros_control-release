@@ -1,19 +1,44 @@
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
+cmake_minimum_required(VERSION 2.8.3)
+project(controller_manager_msgs)
 
-set(ROSPACK_MAKEDIST true)
+if(USE_ROSBUILD)
+  include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 
-# Append to CPACK_SOURCE_IGNORE_FILES a semicolon-separated list of
-# directories (or patterns, but directories should suffice) that should
-# be excluded from the distro.  This is not the place to put things that
-# should be ignored everywhere, like "build" directories; that happens in
-# rosbuild/rosbuild.cmake.  Here should be listed packages that aren't
-# ready for inclusion in a distro.
-#
-# This list is combined with the list in rosbuild/rosbuild.cmake.  Note
-# that CMake 2.6 may be required to ensure that the two lists are combined
-# properly.  CMake 2.4 seems to have unpredictable scoping rules for such
-# variables.
-#list(APPEND CPACK_SOURCE_IGNORE_FILES /core/experimental)
+  rosbuild_init()
+  rosbuild_genmsg()
+  rosbuild_gensrv()
 
-rosbuild_make_distribution(0.0.3)
+else()
+
+  # Load catkin and all dependencies required for this package
+  find_package(catkin REQUIRED COMPONENTS message_generation std_msgs)
+
+  # Add message and service files
+  add_message_files(
+    FILES 
+    ControllerState.msg
+    ControllerStatistics.msg
+    ControllersStatistics.msg
+    )
+
+  add_service_files(
+    FILES
+    ListControllerTypes.srv
+    ListControllers.srv
+    LoadController.srv
+    ReloadControllerLibraries.srv
+    SwitchController.srv
+    UnloadController.srv
+    )
+
+  # Generate added messages and services with any dependencies listed here
+  generate_messages(
+    DEPENDENCIES std_msgs
+    )
+
+  # Declare catkin package
+  catkin_package(
+    CATKIN_DEPENDS std_msgs message_runtime
+    )
+
+endif()
