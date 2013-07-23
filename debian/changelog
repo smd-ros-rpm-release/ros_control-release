@@ -1,0 +1,37 @@
+ros-hydro-ros-control (0.5.3-0precise) precise; urgency=high
+
+
+
+ -- Wim Meeussen <wim@hidof.com>  Mon, 22 Jul 2013 07:00:00 -0000
+
+ros-hydro-ros-control (0.5.2-0precise) precise; urgency=high
+
+  * Fix to build transmission_interface
+
+ -- Wim Meeussen <wim@hidof.com>  Mon, 22 Jul 2013 07:00:00 -0000
+
+ros-hydro-ros-control (0.5.1-0precise) precise; urgency=high
+
+  * Added new maintainer
+  * Tinyxml dependency tweak
+
+ -- Wim Meeussen <wim@hidof.com>  Fri, 19 Jul 2013 07:00:00 -0000
+
+ros-hydro-ros-control (0.5.0-0precise) precise; urgency=high
+
+  * Added tranmission parsing
+  * Added joint limit
+  * Added sensor interfaces
+  * Better documentation
+  * Code cleanup
+
+ -- Wim Meeussen <wim@hidof.com>  Tue, 16 Jul 2013 07:00:00 -0000
+
+ros-hydro-ros-control (0.4.0-0precise) precise; urgency=high
+
+  * Initial Hydro release of ros_control
+  * Catkinized
+
+ -- Wim Meeussen <wim@hidof.com>  Tue, 25 Jun 2013 07:00:00 -0000
+
+
