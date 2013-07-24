@@ -1,3 +1,30 @@
+## ros_control - 0.5.5-0
+
+User `dave@eve` released the packages in the `ros_control` repository by running `/usr/bin/bloom-release ros_control -t hydro -r hydro` on `Wed, 24 Jul 2013 00:06:35 -0000`
+
+These packages were released:
+- `controller_interface`
+- `controller_manager`
+- `controller_manager_msgs`
+- `controller_manager_tests`
+- `hardware_interface`
+- `joint_limits_interface`
+- `ros_control`
+- `transmission_interface`
+
+Version of package(s) in repository `ros_control`:
+- rosdistro version: `0.5.3-0`
+- old version: `0.5.4-0`
+- new version: `0.5.5-0`
+
+Versions of tools used:
+- bloom version: `0.4.4`
+- catkin_pkg version: `0.1.18`
+- rosdep version: `0.10.21`
+- rosdistro version: `0.2.13`
+- vcstools version: `0.1.31`
+
+
 ## ros_control - 0.5.4-0
 
 User `dave@eve` released the packages in the `ros_control` repository by running `/usr/bin/bloom-release ros_control -t hydro -r hydro` on `Tue, 23 Jul 2013 21:40:07 -0000`
