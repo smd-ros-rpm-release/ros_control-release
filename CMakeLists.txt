@@ -1,19 +1,67 @@
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
+cmake_minimum_required(VERSION 2.8.3)
+project(transmission_interface)
 
-set(ROSPACK_MAKEDIST true)
+if(USE_ROSBUILD)
 
-# Append to CPACK_SOURCE_IGNORE_FILES a semicolon-separated list of
-# directories (or patterns, but directories should suffice) that should
-# be excluded from the distro.  This is not the place to put things that
-# should be ignored everywhere, like "build" directories; that happens in
-# rosbuild/rosbuild.cmake.  Here should be listed packages that aren't
-# ready for inclusion in a distro.
-#
-# This list is combined with the list in rosbuild/rosbuild.cmake.  Note
-# that CMake 2.6 may be required to ensure that the two lists are combined
-# properly.  CMake 2.4 seems to have unpredictable scoping rules for such
-# variables.
-#list(APPEND CPACK_SOURCE_IGNORE_FILES /core/experimental)
+  include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 
-rosbuild_make_distribution(0.0.3)
+  rosbuild_init()
+
+  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+  set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+
+  # Transmission Paraser Library
+  rosbuild_add_library(${PROJECT_NAME}_parser src/transmission_parser.cpp)
+  target_link_libraries(${PROJECT_NAME}_parser)
+
+  rosbuild_add_gtest(simple_transmission_test           test/simple_transmission_test.cpp)
+  rosbuild_add_gtest(differential_transmission_test     test/differential_transmission_test.cpp)
+  rosbuild_add_gtest(four_bar_linkage_transmission_test test/four_bar_linkage_transmission_test.cpp)
+  rosbuild_add_gtest(transmission_interface_test        test/transmission_interface_test.cpp)
+
+  # TODO: why is it explicitly needed???, without it linker fails.
+  target_link_libraries(simple_transmission_test           pthread)
+  target_link_libraries(differential_transmission_test     pthread)
+  target_link_libraries(four_bar_linkage_transmission_test pthread)
+  target_link_libraries(transmission_interface_test        pthread)
+
+else()
+
+  # Load catkin and all dependencies required for this package
+  find_package(catkin REQUIRED
+    hardware_interface
+  )
+
+  # Include a custom cmake file for TinyXML
+  list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+  find_package(TINYXML REQUIRED)
+
+  # Build
+  include_directories(include ${catkin_INCLUDE_DIRS} ${TINYXML_INCLUDE_DIRS})
+
+  # Transmission Paraser Library
+  add_library(${PROJECT_NAME}_parser
+    src/transmission_parser.cpp
+  )
+  target_link_libraries(${PROJECT_NAME}_parser ${catkin_LIBRARIES} ${TINYXML_LIBRARIES})
+
+  # Declare a catkin package
+  catkin_package(
+    LIBRARIES
+      ${PROJECT_NAME}_parser
+    INCLUDE_DIRS
+      include
+  )
+
+  # Tests
+  catkin_add_gtest(simple_transmission_test           test/simple_transmission_test.cpp)
+  catkin_add_gtest(differential_transmission_test     test/differential_transmission_test.cpp)
+  catkin_add_gtest(four_bar_linkage_transmission_test test/four_bar_linkage_transmission_test.cpp)
+  catkin_add_gtest(transmission_interface_test        test/transmission_interface_test.cpp)
+  target_link_libraries(transmission_interface_test ${catkin_LIBRARIES} ${TINYXML_LIBRARIES})
+
+  # Install
+  install(DIRECTORY include/${PROJECT_NAME}/
+    DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+
+endif()
