@@ -1,0 +1,12 @@
+Source: ros-hydro-transmission-interface
+Section: misc
+Priority: extra
+Maintainer: Adolfo Rodriguez Tsouroukdissian <adolfo.rodriguez@pal-robotics.com>
+Build-Depends: debhelper (>= 7.0.50~), libtinyxml-dev, ros-hydro-catkin, ros-hydro-hardware-interface
+Homepage: https://github.com/ros-controls/ros_control/wiki
+Standards-Version: 3.9.2
+
+Package: ros-hydro-transmission-interface
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libtinyxml-dev
+Description: Transmission Interface.
