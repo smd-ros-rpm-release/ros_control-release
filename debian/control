@@ -1,0 +1,12 @@
+Source: ros-hydro-controller-interface
+Section: misc
+Priority: extra
+Maintainer: Wim Meeussen <wim@hidof.com>
+Build-Depends: debhelper (>= 7.0.50~), ros-hydro-catkin, ros-hydro-hardware-interface, ros-hydro-pluginlib, ros-hydro-roscpp
+Homepage: https://github.com/ros-controls/ros_control/wiki
+Standards-Version: 3.9.2
+
+Package: ros-hydro-controller-interface
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-hydro-hardware-interface, ros-hydro-pluginlib, ros-hydro-roscpp
+Description: Interface base class for controllers
