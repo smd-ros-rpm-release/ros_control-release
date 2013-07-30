@@ -2,6 +2,15 @@
 Changelog for package hardware_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.5.6 (2013-07-29)
+------------------
+
+0.5.7 (2013-07-30)
+------------------
+
+* Updated changelogs
+* Author/maintainer list update.
+
 0.5.5 (2013-07-23)
 ------------------
 
