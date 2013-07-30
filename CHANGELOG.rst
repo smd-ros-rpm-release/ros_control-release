@@ -2,6 +2,18 @@
 Changelog for package transmission_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.5.7 (2013-07-30)
+------------------
+* Fix for building ros_control
+* Updated CHANGELOG
+
+0.5.6 (2013-07-29)
+------------------
+
+* NOTE: ros_control now requires ros-*-cmake-modules for source-installations. Install via rosdep or manually
+* Removed the local FindTINYXML.cmake and switched to catkin's cmake_modules version
+* Installed missing transmission_interface_library
+
 0.5.5 (2013-07-23)
 ------------------
 * transmission_interface: fixup finding tinyxml
