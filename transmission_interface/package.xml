@@ -1,6 +1,6 @@
 <package>
   <name>transmission_interface</name>
-  <version>0.5.5</version>
+  <version>0.5.7</version>
   <description>Transmission Interface.</description>
 
   <maintainer email="adolfo.rodriguez@pal-robotics.com">Adolfo Rodriguez Tsouroukdissian</maintainer>
@@ -18,6 +18,7 @@
 
   <build_depend>hardware_interface</build_depend>
   <build_depend>tinyxml</build_depend>
+  <build_depend>cmake_modules</build_depend>
 
   <run_depend>tinyxml</run_depend>
 
