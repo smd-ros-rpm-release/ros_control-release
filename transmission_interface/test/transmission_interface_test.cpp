@@ -8,7 +8,7 @@
 //   * Redistributions in binary form must reproduce the above copyright
 //     notice, this list of conditions and the following disclaimer in the
 //     documentation and/or other materials provided with the distribution.
-//   * Neither the name of hiDOF, Inc. nor the names of its
+//   * Neither the name of PAL Robotics S.L. nor the names of its
 //     contributors may be used to endorse or promote products derived from
 //     this software without specific prior written permission.
 //
@@ -217,7 +217,11 @@ class TransmissionInterfaceSetup : public ::testing::Test
 {
 public:
   TransmissionInterfaceSetup()
-    : trans1( 10.0, 1.0),
+    : a_curr_pos(), a_curr_vel(), a_curr_eff(),
+      j_curr_pos(), j_curr_vel(), j_curr_eff(),
+      a_cmd_pos(), a_cmd_vel(), a_cmd_eff(),
+      j_cmd_pos(), j_cmd_vel(), j_cmd_eff(),
+      trans1( 10.0, 1.0),
       trans2(-10.0, 1.0) {}
 
 protected:
