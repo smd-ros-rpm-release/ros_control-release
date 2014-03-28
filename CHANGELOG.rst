@@ -2,6 +2,9 @@
 Changelog for package transmission_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.7.0 (2014-03-28)
+------------------
+
 0.6.0 (2014-02-05)
 ------------------
 * Add accessors to get transmission configuration.
