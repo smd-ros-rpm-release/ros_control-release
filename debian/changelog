@@ -1,0 +1,85 @@
+ros-hydro-ros-control (0.7.1-1quantal) quantal; urgency=high
+
+
+
+ -- Wim Meeussen <wim@hidof.com>  Sun, 30 Mar 2014 22:00:00 -0000
+
+ros-hydro-ros-control (0.7.0-1quantal) quantal; urgency=high
+
+
+
+ -- Wim Meeussen <wim@hidof.com>  Thu, 27 Mar 2014 23:00:00 -0000
+
+ros-hydro-ros-control (0.6.0-1quantal) quantal; urgency=high
+
+
+
+ -- Wim Meeussen <wim@hidof.com>  Tue, 04 Feb 2014 23:00:00 -0000
+
+ros-hydro-ros-control (0.5.8-1quantal) quantal; urgency=high
+
+
+
+ -- Wim Meeussen <wim@hidof.com>  Thu, 10 Oct 2013 22:00:00 -0000
+
+ros-hydro-ros-control (0.5.7-1quantal) quantal; urgency=high
+
+  * Updated changelogs
+
+ -- Wim Meeussen <wim@hidof.com>  Mon, 29 Jul 2013 22:00:00 -0000
+
+ros-hydro-ros-control (0.5.6-1quantal) quantal; urgency=high
+
+
+
+ -- Wim Meeussen <wim@hidof.com>  Sun, 28 Jul 2013 22:00:00 -0000
+
+ros-hydro-ros-control (0.5.5-1quantal) quantal; urgency=high
+
+
+
+ -- Wim Meeussen <wim@hidof.com>  Mon, 22 Jul 2013 22:00:00 -0000
+
+ros-hydro-ros-control (0.5.4-1quantal) quantal; urgency=high
+
+
+
+ -- Wim Meeussen <wim@hidof.com>  Mon, 22 Jul 2013 22:00:00 -0000
+
+ros-hydro-ros-control (0.5.3-1quantal) quantal; urgency=high
+
+
+
+ -- Wim Meeussen <wim@hidof.com>  Sun, 21 Jul 2013 22:00:00 -0000
+
+ros-hydro-ros-control (0.5.2-1quantal) quantal; urgency=high
+
+  * Fix to build transmission_interface
+
+ -- Wim Meeussen <wim@hidof.com>  Sun, 21 Jul 2013 22:00:00 -0000
+
+ros-hydro-ros-control (0.5.1-1quantal) quantal; urgency=high
+
+  * Added new maintainer
+  * Tinyxml dependency tweak
+
+ -- Wim Meeussen <wim@hidof.com>  Thu, 18 Jul 2013 22:00:00 -0000
+
+ros-hydro-ros-control (0.5.0-1quantal) quantal; urgency=high
+
+  * Added tranmission parsing
+  * Added joint limit
+  * Added sensor interfaces
+  * Better documentation
+  * Code cleanup
+
+ -- Wim Meeussen <wim@hidof.com>  Mon, 15 Jul 2013 22:00:00 -0000
+
+ros-hydro-ros-control (0.4.0-1quantal) quantal; urgency=high
+
+  * Initial Hydro release of ros_control
+  * Catkinized
+
+ -- Wim Meeussen <wim@hidof.com>  Mon, 24 Jun 2013 22:00:00 -0000
+
+
