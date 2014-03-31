@@ -2,6 +2,9 @@
 Changelog for package controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.7.1 (2014-03-31)
+------------------
+
 0.7.0 (2014-03-28)
 ------------------
 * Add --timeout option to controller spawner
