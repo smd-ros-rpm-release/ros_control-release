@@ -1,3 +1,31 @@
+## ros_control (hydro) - 0.7.1-1
+
+User `adolfo@greece` released the packages in the `ros_control` repository into the `hydro` distro by running `/usr/bin/bloom-release ros_control --track hydro --rosdistro hydro` on `Mon, 31 Mar 2014 11:26:16 -0000`
+
+These packages were released:
+- `controller_interface`
+- `controller_manager`
+- `controller_manager_msgs`
+- `controller_manager_tests`
+- `hardware_interface`
+- `joint_limits_interface`
+- `ros_control`
+- `rqt_controller_manager`
+- `transmission_interface`
+
+Version of package(s) in repository `ros_control`:
+- rosdistro version: `0.7.0-0`
+- old version: `0.7.1-0`
+- new version: `0.7.1-1`
+
+Versions of tools used:
+- bloom version: `0.5.2`
+- catkin_pkg version: `0.1.25`
+- rosdep version: `0.10.25`
+- rosdistro version: `0.3.3`
+- vcstools version: `0.1.33`
+
+
 ## ros_control (hydro) - 0.7.1-0
 
 User `adolfo@greece` released the packages in the `ros_control` repository into the `hydro` distro by running `/usr/bin/bloom-release ros_control --track hydro --rosdistro hydro` on `Mon, 31 Mar 2014 09:42:40 -0000`
