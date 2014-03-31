@@ -2,6 +2,11 @@
 Changelog for package joint_limits_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.7.1 (2014-03-31)
+------------------
+* Fix dependency specification in CMake script to allow isolated builds.
+* Contributors: Adolfo Rodriguez Tsouroukdissian
+
 0.7.0 (2014-03-28)
 ------------------
 
