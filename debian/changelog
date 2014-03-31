@@ -1,0 +1,82 @@
+ros-hydro-rqt-controller-manager (0.7.1-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Sun, 30 Mar 2014 22:00:00 -0000
+
+ros-hydro-rqt-controller-manager (0.7.0-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Thu, 27 Mar 2014 23:00:00 -0000
+
+ros-hydro-rqt-controller-manager (0.6.0-1raring) raring; urgency=high
+
+  * Added controller namespace detection and switching, loadable controller parameter detection and buttons for loading or starting the controller directly from the parameter server.
+  * Resources -> Claimed Resources column title
+  * Initial commit for rqt controller manager plugin.  Plugin seems functional from first tests.  Allows users to unload/load/start/stop/view available controllers.  No functionality yet exists for loading a controller from scratch.
+  * Contributors: Kelsey
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Tue, 04 Feb 2014 23:00:00 -0000
+
+ros-hydro-rqt-controller-manager (0.5.8-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Thu, 10 Oct 2013 22:00:00 -0000
+
+ros-hydro-rqt-controller-manager (0.5.7-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Mon, 29 Jul 2013 22:00:00 -0000
+
+ros-hydro-rqt-controller-manager (0.5.6-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Sun, 28 Jul 2013 22:00:00 -0000
+
+ros-hydro-rqt-controller-manager (0.5.5-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Tue, 23 Jul 2013 15:04:00 -0000
+
+ros-hydro-rqt-controller-manager (0.5.4-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Tue, 23 Jul 2013 12:37:00 -0000
+
+ros-hydro-rqt-controller-manager (0.5.3-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Mon, 22 Jul 2013 16:06:00 -0000
+
+ros-hydro-rqt-controller-manager (0.5.2-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Mon, 22 Jul 2013 13:00:00 -0000
+
+ros-hydro-rqt-controller-manager (0.5.1-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Thu, 18 Jul 2013 22:00:00 -0000
+
+ros-hydro-rqt-controller-manager (0.5.0-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Mon, 15 Jul 2013 22:00:00 -0000
+
+ros-hydro-rqt-controller-manager (0.4.0-1raring) raring; urgency=high
+
+
+
+ -- Kelsey Hawkins <kphawkins@gatech.edu>  Mon, 24 Jun 2013 22:00:00 -0000
+
+
