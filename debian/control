@@ -1,0 +1,12 @@
+Source: ros-indigo-hardware-interface
+Section: misc
+Priority: extra
+Maintainer: Wim Meeussen <wim@hidof.com>
+Build-Depends: debhelper (>= 7.0.50~), ros-indigo-catkin, ros-indigo-roscpp
+Homepage: https://github.com/ros-controls/ros_control/wiki
+Standards-Version: 3.9.2
+
+Package: ros-indigo-hardware-interface
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-indigo-roscpp
+Description: Hardware Interface base class.
