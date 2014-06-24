@@ -1,7 +1,8 @@
-## Controller Manager ##
+ros_control
+===========
 
-The `controller_manager` provides a hard-realtime-compatible loop to control a robot mechanism, as well as
-infrastructure to load, unload, start and stop controllers. 
+See [ros_control documentation](http://ros.org/wiki/ros_control) on ros.org
 
-Detailed user documentation can be found in the package's [ROS wiki page](http://wiki.ros.org/controller_manager).
+### Build Status
 
+[![Build Status](https://travis-ci.org/ros-controls/ros_control.png?branch=hydro-devel)](https://travis-ci.org/ros-controls/ros_control)
