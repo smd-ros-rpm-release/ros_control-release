@@ -1,19 +1,110 @@
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
+cmake_minimum_required(VERSION 2.8.3)
+project(transmission_interface)
 
-set(ROSPACK_MAKEDIST true)
+# Load catkin and all dependencies required for this package
+find_package(catkin REQUIRED
+  hardware_interface
+  cmake_modules
+  pluginlib
+  resource_retriever
+  roscpp
+)
 
-# Append to CPACK_SOURCE_IGNORE_FILES a semicolon-separated list of
-# directories (or patterns, but directories should suffice) that should
-# be excluded from the distro.  This is not the place to put things that
-# should be ignored everywhere, like "build" directories; that happens in
-# rosbuild/rosbuild.cmake.  Here should be listed packages that aren't
-# ready for inclusion in a distro.
-#
-# This list is combined with the list in rosbuild/rosbuild.cmake.  Note
-# that CMake 2.6 may be required to ensure that the two lists are combined
-# properly.  CMake 2.4 seems to have unpredictable scoping rules for such
-# variables.
-#list(APPEND CPACK_SOURCE_IGNORE_FILES /core/experimental)
+# Include a custom cmake file for TinyXML
+find_package(TinyXML REQUIRED)
 
-rosbuild_make_distribution(0.0.3)
+# Declare a catkin package
+catkin_package(
+  LIBRARIES
+    ${PROJECT_NAME}_parser
+  INCLUDE_DIRS
+    include
+  DEPENDS
+    TinyXML
+    pluginlib
+    resource_retriever
+    roscpp
+)
+
+###########
+## Build ##
+###########
+
+# Build
+include_directories(include ${catkin_INCLUDE_DIRS} ${TinyXML_INCLUDE_DIRS})
+
+# Transmission parser Library
+add_library(${PROJECT_NAME}_parser
+  src/transmission_parser.cpp include/transmission_interface/transmission_parser.h
+)
+target_link_libraries(${PROJECT_NAME}_parser ${catkin_LIBRARIES} ${TinyXML_LIBRARIES})
+
+
+# Transmission loader library
+add_library(transmission_interface_loader
+  src/transmission_loader.cpp           include/transmission_interface/transmission_loader.h
+  src/transmission_interface_loader.cpp include/transmission_interface/transmission_interface_loader.h
+)
+target_link_libraries(transmission_interface_loader
+  ${PROJECT_NAME}_parser
+  ${catkin_LIBRARIES}
+  ${TinyXML_LIBRARIES})
+
+
+add_library(transmission_interface_loader_plugins
+  src/simple_transmission_loader.cpp           include/transmission_interface/simple_transmission_loader.h
+  src/differential_transmission_loader.cpp     include/transmission_interface/differential_transmission_loader.h
+  src/four_bar_linkage_transmission_loader.cpp include/transmission_interface/four_bar_linkage_transmission_loader.h
+  src/joint_state_interface_provider.cpp       include/transmission_interface/joint_state_interface_provider.h
+  src/position_joint_interface_provider.cpp    include/transmission_interface/position_joint_interface_provider.h
+  src/velocity_joint_interface_provider.cpp    include/transmission_interface/velocity_joint_interface_provider.h
+  src/effort_joint_interface_provider.cpp      include/transmission_interface/effort_joint_interface_provider.h)
+target_link_libraries(transmission_interface_loader_plugins transmission_interface_loader)
+
+
+#############
+## Install ##
+#############
+
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+
+install(TARGETS ${PROJECT_NAME}_parser
+                ${PROJECT_NAME}_loader
+                ${PROJECT_NAME}_loader_plugins
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(FILES ros_control_plugins.xml
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+#############
+## Testing ##
+#############
+
+if(CATKIN_ENABLE_TESTING)
+  catkin_add_gtest(simple_transmission_test           test/simple_transmission_test.cpp)
+  catkin_add_gtest(differential_transmission_test     test/differential_transmission_test.cpp)
+  catkin_add_gtest(four_bar_linkage_transmission_test test/four_bar_linkage_transmission_test.cpp)
+
+  catkin_add_gtest(transmission_interface_test        test/transmission_interface_test.cpp)
+  target_link_libraries(transmission_interface_test ${catkin_LIBRARIES} ${TinyXML_LIBRARIES})
+
+  catkin_add_gtest(transmission_parser_test test/transmission_parser_test.cpp)
+  target_link_libraries(transmission_parser_test ${PROJECT_NAME}_parser)
+
+  catkin_add_gtest(simple_transmission_loader_test test/simple_transmission_loader_test.cpp)
+  target_link_libraries(simple_transmission_loader_test ${PROJECT_NAME}_parser)
+
+  catkin_add_gtest(differential_transmission_loader_test test/differential_transmission_loader_test.cpp)
+  target_link_libraries(differential_transmission_loader_test ${PROJECT_NAME}_parser)
+
+  catkin_add_gtest(four_bar_linkage_transmission_loader_test test/four_bar_linkage_transmission_loader_test.cpp)
+  target_link_libraries(four_bar_linkage_transmission_loader_test ${PROJECT_NAME}_parser)
+
+  catkin_add_gtest(transmission_interface_loader_test test/transmission_interface_loader_test.cpp)
+  target_link_libraries(transmission_interface_loader_test ${PROJECT_NAME}_parser
+                                                          transmission_interface_loader)
+endif()
