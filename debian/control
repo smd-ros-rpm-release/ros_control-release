@@ -1,0 +1,12 @@
+Source: ros-indigo-joint-limits-interface
+Section: misc
+Priority: extra
+Maintainer: Adolfo Rodriguez Tsouroukdissian <adolfo.rodriguez@pal-robotics.com>
+Build-Depends: debhelper (>= 9.0.0), liburdfdom-dev, ros-indigo-catkin, ros-indigo-hardware-interface, ros-indigo-roscpp, ros-indigo-rostest
+Homepage: https://github.com/ros-controls/ros_control/wiki
+Standards-Version: 3.9.2
+
+Package: ros-indigo-joint-limits-interface
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, liburdfdom-dev, ros-indigo-hardware-interface, ros-indigo-roscpp
+Description: Interface for enforcing joint limits.
