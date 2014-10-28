@@ -2,17 +2,11 @@
 Changelog for package controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.8.2 (2014-06-25)
+0.7.3 (2014-10-28)
 ------------------
-
-0.8.1 (2014-06-24)
-------------------
-
-0.8.0 (2014-05-12)
-------------------
-* Remove rosbuild artifacts. Fix `#154 <https://github.com/ros-controls/ros_control/issues/154>`_.
+* Spawner: adding shutdown timeout to prevent deadlocks
 * Create README.md
-* Contributors: Adolfo Rodriguez Tsouroukdissian
+* Contributors: Adolfo Rodriguez Tsouroukdissian, Jonathan Bohren
 
 0.7.2 (2014-04-01)
 ------------------

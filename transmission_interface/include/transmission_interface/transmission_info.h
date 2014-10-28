@@ -41,11 +41,10 @@
 #ifndef TRANSMISSION_INTERFACE_TRANSMISSION_INTERFACE_INFO_H
 #define TRANSMISSION_INTERFACE_TRANSMISSION_INTERFACE_INFO_H
 
-// C++ standard
 #include <vector>
 #include <string>
 
-// TinyXML
+// XML
 #include <tinyxml.h>
 
 namespace transmission_interface
@@ -57,19 +56,18 @@ namespace transmission_interface
 struct JointInfo
 {
   std::string name_;
-  std::vector<std::string> hardware_interfaces_;
+  std::string hardware_interface_;
   std::string role_;
-  std::string xml_element_;
+  TiXmlElement* xml_element_;
 };
 
 /**
  * \brief Contains semantic info about a given actuator loaded from XML (URDF)
  */
-struct ActuatorInfo
-{
+struct ActuatorInfo {
   std::string name_;
-  std::vector<std::string> hardware_interfaces_;
-  std::string xml_element_;
+  std::string hardware_interface_;
+  TiXmlElement* xml_element_;
 };
 
 /**
