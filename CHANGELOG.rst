@@ -2,6 +2,9 @@
 Changelog for package rqt_controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.7.3 (2014-10-28)
+------------------
+
 0.7.2 (2014-04-01)
 ------------------
 * Add plugin resources to installation target.
