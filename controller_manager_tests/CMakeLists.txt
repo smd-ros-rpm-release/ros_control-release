@@ -10,7 +10,7 @@ if(USE_ROSBUILD)
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
   set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-  rosbuild_add_library(${PROJECT_NAME} 
+  rosbuild_add_library(${PROJECT_NAME}
     src/my_robot_hw.cpp
     include/controller_manager_tests/my_robot_hw.h
     src/effort_test_controller.cpp
@@ -29,7 +29,7 @@ if(USE_ROSBUILD)
 else()
 
   # Load catkin and all dependencies required for this package
-  find_package(catkin REQUIRED COMPONENTS rostest controller_manager controller_interface control_toolbox)
+  find_package(catkin REQUIRED COMPONENTS controller_manager controller_interface control_toolbox)
 
   include_directories(include ${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS})
 
@@ -40,7 +40,7 @@ else()
     )
 
   #common commands for building c++ executables and libraries
-  add_library(${PROJECT_NAME} 
+  add_library(${PROJECT_NAME}
     src/my_robot_hw.cpp
     include/controller_manager_tests/my_robot_hw.h
     src/effort_test_controller.cpp
@@ -48,11 +48,13 @@ else()
     src/my_dummy_controller.cpp
     include/controller_manager_tests/my_dummy_controller.h
     )
+  target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
   add_executable(dummy_app src/dummy_app.cpp)
   target_link_libraries(dummy_app ${PROJECT_NAME} ${catkin_LIBRARIES})
 
   if(CATKIN_ENABLE_TESTING)
+    find_package(rostest)
     add_executable(cm_test test/cm_test.cpp)
     add_dependencies(tests cm_test)
     target_link_libraries(cm_test ${GTEST_LIBRARIES} ${catkin_LIBRARIES})
