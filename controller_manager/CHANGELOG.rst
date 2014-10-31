@@ -2,6 +2,12 @@
 Changelog for package controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.9.0 (2014-10-31)
+------------------
+* Spawner script: adding shutdown timeout to prevent deadlocks
+* Documentation fixes
+* Contributors: Jonathan Bohren, shadowmanos
+
 0.8.2 (2014-06-25)
 ------------------
 
