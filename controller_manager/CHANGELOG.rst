@@ -2,11 +2,23 @@
 Changelog for package controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.7.3 (2014-10-28)
+0.9.0 (2014-10-31)
 ------------------
-* Spawner: adding shutdown timeout to prevent deadlocks
+* Spawner script: adding shutdown timeout to prevent deadlocks
+* Documentation fixes
+* Contributors: Jonathan Bohren, shadowmanos
+
+0.8.2 (2014-06-25)
+------------------
+
+0.8.1 (2014-06-24)
+------------------
+
+0.8.0 (2014-05-12)
+------------------
+* Remove rosbuild artifacts. Fix `#154 <https://github.com/ros-controls/ros_control/issues/154>`_.
 * Create README.md
-* Contributors: Adolfo Rodriguez Tsouroukdissian, Jonathan Bohren
+* Contributors: Adolfo Rodriguez Tsouroukdissian
 
 0.7.2 (2014-04-01)
 ------------------

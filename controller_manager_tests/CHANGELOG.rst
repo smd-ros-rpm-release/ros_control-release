@@ -2,11 +2,24 @@
 Changelog for package controller_manager_tests
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.7.3 (2014-10-28)
+0.9.0 (2014-10-31)
 ------------------
-* make rostest in CMakeLists optional
+* Tests for Python helpers added to controller_manager_msgs
+* Buildsystem and documentation fixes
+* Contributors: Adolfo Rodriguez Tsouroukdissian, Lukas Bulwahn, shadowmanos
+
+0.8.2 (2014-06-25)
+------------------
+
+0.8.1 (2014-06-24)
+------------------
+
+0.8.0 (2014-05-12)
+------------------
 * controller_manager_tests: fix library linking
-* Contributors: Lukas Bulwahn, Paul Mathieu
+  From patch provided by po1 on hydro-devel.
+* Remove rosbuild artifacts. Fix `#154 <https://github.com/ros-controls/ros_control/issues/154>`_.
+* Contributors: Adolfo Rodriguez Tsouroukdissian
 
 0.7.2 (2014-04-01)
 ------------------
