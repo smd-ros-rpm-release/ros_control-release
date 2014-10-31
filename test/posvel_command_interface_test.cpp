@@ -30,65 +30,71 @@
 #include <string>
 #include <gtest/gtest.h>
 #include <ros/console.h>
-#include <hardware_interface/actuator_command_interface.h>
+#include <hardware_interface/posvel_command_interface.h>
 
 using std::string;
 using namespace hardware_interface;
 
-TEST(ActuatorCommandHandleTest, HandleConstruction)
+TEST(PosVelCommandHandleTest, HandleConstruction)
 {
   string name = "name1";
   double pos, vel, eff;
-  double cmd;
-  EXPECT_NO_THROW(ActuatorHandle tmp(ActuatorStateHandle(name, &pos, &vel, &eff), &cmd));
-  EXPECT_THROW(ActuatorHandle tmp(ActuatorStateHandle(name, &pos, &vel, &eff), 0), HardwareInterfaceException);
+  double cmd_pos, cmd_vel;
+  EXPECT_NO_THROW(PosVelJointHandle tmp(JointStateHandle(name, &pos, &vel, &eff), &cmd_pos, &cmd_vel));
+  EXPECT_THROW(PosVelJointHandle tmp(JointStateHandle(name, &pos, &vel, &eff), 0, &cmd_vel), HardwareInterfaceException);
+  EXPECT_THROW(PosVelJointHandle tmp(JointStateHandle(name, &pos, &vel, &eff), &cmd_pos, 0), HardwareInterfaceException);
 
   // Print error messages
   // Requires manual output inspection, but exception message should be descriptive
-  try {ActuatorHandle(ActuatorStateHandle(name, &pos, &vel, &eff), 0);}
+  try {PosVelJointHandle tmp(JointStateHandle(name, &pos, &vel, &eff), 0, 0);}
   catch(const HardwareInterfaceException& e) {ROS_ERROR_STREAM(e.what());}
 }
 
 #ifndef NDEBUG // NOTE: This test validates assertion triggering, hence only gets compiled in debug mode
-TEST(ActuatorStateHandleTest, AssertionTriggering)
+TEST(JointStateHandleTest, AssertionTriggering)
 {
-  ActuatorHandle h;
+  PosVelJointHandle h;
 
   // Data with invalid pointers should trigger an assertion
   EXPECT_DEATH(h.getPosition(),   ".*");
   EXPECT_DEATH(h.getVelocity(),   ".*");
   EXPECT_DEATH(h.getEffort(),     ".*");
-  EXPECT_DEATH(h.getCommand(),    ".*");
-  EXPECT_DEATH(h.setCommand(1.0), ".*");
+  EXPECT_DEATH(h.getCommandPosition(),     ".*");
+  EXPECT_DEATH(h.getCommandVelocity(),     ".*");
+  EXPECT_DEATH(h.setCommandPosition(2.0),     ".*");
+  EXPECT_DEATH(h.setCommandVelocity(3.0),     ".*");
+  EXPECT_DEATH(h.setCommand(1.0, 2.0), ".*");
 }
 #endif // NDEBUG
 
-class ActuatorCommandInterfaceTest : public ::testing::Test
+class PosVelCommandInterfaceTest : public ::testing::Test
 {
 public:
-  ActuatorCommandInterfaceTest()
-    : pos1(1.0), vel1(2.0), eff1(3.0), cmd1(0.0),
-      pos2(4.0), vel2(5.0), eff2(6.0), cmd2(0.0),
+  PosVelCommandInterfaceTest()
+    : pos1(1.0), vel1(2.0), eff1(3.0),
+      cmd_pos1(0.0), cmd_vel1(0.0),
+      pos2(4.0), vel2(5.0), eff2(6.0),
+      cmd_pos2(0.0), cmd_vel2(0.0),
       name1("name_1"),
       name2("name_2"),
       hs1(name1, &pos1, &vel1, &eff1),
       hs2(name2, &pos2, &vel2, &eff2),
-      hc1(hs1, &cmd1),
-      hc2(hs2, &cmd2)
+      hc1(hs1, &cmd_pos1, &cmd_vel1),
+      hc2(hs2, &cmd_pos2, &cmd_vel2)
   {}
 
 protected:
-  double pos1, vel1, eff1, cmd1;
-  double pos2, vel2, eff2, cmd2;
+  double pos1, vel1, eff1, cmd_pos1, cmd_vel1;
+  double pos2, vel2, eff2, cmd_pos2, cmd_vel2;
   string name1;
   string name2;
-  ActuatorStateHandle hs1, hs2;
-  ActuatorHandle hc1, hc2;
+  JointStateHandle hs1, hs2;
+  PosVelJointHandle hc1, hc2;
 };
 
-TEST_F(ActuatorCommandInterfaceTest, ExcerciseApi)
+TEST_F(PosVelCommandInterfaceTest, ExcerciseApi)
 {
-  ActuatorCommandInterface iface;
+  PosVelJointInterface iface;
   iface.registerHandle(hc1);
   iface.registerHandle(hc2);
 
@@ -96,36 +102,36 @@ TEST_F(ActuatorCommandInterfaceTest, ExcerciseApi)
   EXPECT_NO_THROW(iface.getHandle(name1));
   EXPECT_NO_THROW(iface.getHandle(name2));
 
-  ActuatorHandle hc1_tmp = iface.getHandle(name1);
+  PosVelJointHandle hc1_tmp = iface.getHandle(name1);
   EXPECT_EQ(name1, hc1_tmp.getName());
   EXPECT_DOUBLE_EQ(pos1, hc1_tmp.getPosition());
   EXPECT_DOUBLE_EQ(vel1, hc1_tmp.getVelocity());
   EXPECT_DOUBLE_EQ(eff1, hc1_tmp.getEffort());
-  EXPECT_DOUBLE_EQ(cmd1, hc1_tmp.getCommand());
-  EXPECT_EQ(&pos1, hc1_tmp.getPositionPtr());
-  EXPECT_EQ(&vel1, hc1_tmp.getVelocityPtr());
-  EXPECT_EQ(&eff1, hc1_tmp.getEffortPtr());
-  EXPECT_EQ(&cmd1, hc1_tmp.getCommandPtr());
+  EXPECT_DOUBLE_EQ(cmd_pos1, hc1_tmp.getCommandPosition());
+  EXPECT_DOUBLE_EQ(cmd_vel1, hc1_tmp.getCommandVelocity());
+  const double new_cmd_pos1 = -1.0, new_cmd_vel1 = -2.0;
+  hc1_tmp.setCommand(new_cmd_pos1, new_cmd_vel1);
+  EXPECT_DOUBLE_EQ(new_cmd_pos1, hc1_tmp.getCommandPosition());
+  EXPECT_DOUBLE_EQ(new_cmd_vel1, hc1_tmp.getCommandVelocity());
 
-  const double new_cmd_1 = -1.0;
-  hc1_tmp.setCommand(new_cmd_1);
-  EXPECT_DOUBLE_EQ(new_cmd_1, hc1_tmp.getCommand());
 
-  ActuatorHandle hc2_tmp = iface.getHandle(name2);
+  PosVelJointHandle hc2_tmp = iface.getHandle(name2);
   EXPECT_EQ(name2, hc2_tmp.getName());
   EXPECT_DOUBLE_EQ(pos2, hc2_tmp.getPosition());
   EXPECT_DOUBLE_EQ(vel2, hc2_tmp.getVelocity());
   EXPECT_DOUBLE_EQ(eff2, hc2_tmp.getEffort());
-  EXPECT_DOUBLE_EQ(cmd2, hc2_tmp.getCommand());
-  const double new_cmd_2 = -2.0;
-  hc2_tmp.setCommand(new_cmd_2);
-  EXPECT_DOUBLE_EQ(new_cmd_2, hc2_tmp.getCommand());
+  EXPECT_DOUBLE_EQ(cmd_pos2, hc2_tmp.getCommandPosition());
+  EXPECT_DOUBLE_EQ(cmd_vel2, hc2_tmp.getCommandVelocity());
+  const double new_cmd_pos2 = -1.0, new_cmd_vel2 = -2.0;
+  hc2_tmp.setCommand(new_cmd_pos2, new_cmd_vel2);
+  EXPECT_DOUBLE_EQ(new_cmd_pos2, hc2_tmp.getCommandPosition());
+  EXPECT_DOUBLE_EQ(new_cmd_vel2, hc2_tmp.getCommandVelocity());
 
-  // This interface does not claim resources
-  EXPECT_TRUE(iface.getClaims().empty());
+  // This interface claims resources
+  EXPECT_EQ(2, iface.getClaims().size());
 
   // Print error message
-  // Requires manual output inspection, but exception message should contain the interface name (not its base class)
+  // Requires manual output inspection, but exception message should contain the interface name (not its base clase)
   try {iface.getHandle("unknown_name");}
   catch(const HardwareInterfaceException& e) {ROS_ERROR_STREAM(e.what());}
 }
