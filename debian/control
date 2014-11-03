@@ -1,0 +1,12 @@
+Source: ros-indigo-controller-manager-msgs
+Section: misc
+Priority: extra
+Maintainer: Adolfo Rodriguez Tsouroukdissian <adolfo.rodriguez@pal-robotics.com>
+Build-Depends: debhelper (>= 9.0.0), ros-indigo-catkin, ros-indigo-message-generation, ros-indigo-std-msgs
+Homepage: https://github.com/ros-controls/ros_control/wiki
+Standards-Version: 3.9.2
+
+Package: ros-indigo-controller-manager-msgs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-indigo-message-runtime, ros-indigo-std-msgs
+Description: Messages and services for the controller manager.
