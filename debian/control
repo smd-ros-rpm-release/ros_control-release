@@ -1,0 +1,12 @@
+Source: ros-indigo-controller-manager-tests
+Section: misc
+Priority: extra
+Maintainer: Adolfo Rodriguez Tsouroukdissian <adolfo.rodriguez@pal-robotics.com>
+Build-Depends: debhelper (>= 9.0.0), ros-indigo-catkin, ros-indigo-control-toolbox, ros-indigo-controller-interface, ros-indigo-controller-manager, ros-indigo-rostest
+Homepage: http://ros.org/wiki/controller_manager_tests
+Standards-Version: 3.9.2
+
+Package: ros-indigo-controller-manager-tests
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-indigo-control-toolbox, ros-indigo-controller-interface, ros-indigo-controller-manager, ros-indigo-rostest
+Description: controller_manager_tests
